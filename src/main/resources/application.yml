@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: pet
+  datasource:
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update  # ?? ????? update, ?? ????? validate ?? none ??
+    show-sql: true  # SQL ?? ?? ??
+
+  sql:
+    init:
+      mode: always  # ?? SQL ???? ?? (resources/schema.sql, data.sql)
+
+server:
+  port: 8080  # ?? ?? ??
