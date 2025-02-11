@@ -29,6 +29,7 @@ application-*.properties
 # Maven, Gradle 관련
 .mvn/
 .gradle/
+.gradle
 *.class
 *.jar
 *.war
