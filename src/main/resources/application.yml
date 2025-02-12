@@ -2,20 +2,20 @@ spring:
   application:
     name: pet
   datasource:
-    url: jdbc:postgresql://localhost:5432/testdb
-    username: minjun
-    password:
+    url: jdbc:postgresql://localhost:5432/{TEST_DB_NAME}
+    username: ${TEST_DB_USERNAME}
+    password:  ${TEST_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update  # ?? ????? update, ?? ????? validate ?? none ??
-    show-sql: true  # SQL ?? ?? ??
+      ddl-auto: create
+    show-sql: true
 
   sql:
     init:
-      mode: always  # ?? SQL ???? ?? (resources/schema.sql, data.sql)
+      mode: always
 
 server:
-  port: 8080  # ?? ?? ??
+  port: ${TEST_PORT}

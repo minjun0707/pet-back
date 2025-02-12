@@ -12,7 +12,7 @@ import lombok.Getter;
 //응답 객체를 JSON으로 변환
 
 public class Response {
-	private boolean success;
+	private boolean status;
 	private int code;
 	private Result result;
 
