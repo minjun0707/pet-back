@@ -8,25 +8,32 @@ import kt.pet.domain.user.exception.UserEmailAlreadyExistsException;
 import kt.pet.domain.user.exception.UserNotFoundException;
 import kt.pet.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class SignService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
+    private final PasswordEncoder passwordEncoder;
+
 
     public void signUp(SignUpRequest request) {
+
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(UserNotFoundException::new);
 
         // 이메일, 닉네임 중복성 검사
         validateSignUpInfo(request);
 
+        String subject = String.valueOf(user.getUserId());
+        String accessToken = tokenService.createAccessToken(subject);
+        String refreshToken = tokenService.createRefreshToken(subject);
+
         // 비밀번호 암호화
-        // String password = passwordEncoder.encode(request.getPassword());
-        // request.setPassword(password);
+        String password = passwordEncoder.encode(request.getPassword());
+        request.setPassword(password);
 
         // 회원 정보 저장
         userRepository.save(SignUpRequest.toEntity(request));

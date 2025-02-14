@@ -19,3 +19,11 @@ spring:
 
 server:
   port: ${TEST_PORT}
+
+jwt:
+  key:
+    access: ${TEST_JWT_ACCESS_KEY}
+    refresh: ${TEST_JWT_REFRESH_KEY}
+  max-age:
+    access: ${TEST_JWT_ACCESS_TIME}
+    refresh: ${TEST_JWT_REFRESH_TIME}
