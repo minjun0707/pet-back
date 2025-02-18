@@ -1,8 +1,6 @@
 package kt.pet.domain.user.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import kt.pet.common.EntityDate;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,7 +15,7 @@ import lombok.Setter;
 public class User extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -38,9 +36,8 @@ public class User extends EntityDate {
         this.phoneNumber = phoneNumber;
     }
 
-    public void updateUserInfo(String email, String password, String name, String phoneNumber) {
+    public void updateUserInfo(String email, String name, String phoneNumber) {
         this.email = email;
-        this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }

@@ -25,6 +25,6 @@ public class SignUpRequest {
     private String phoneNumber;
 
     public static User toEntity(SignUpRequest request) {
-        return new User(request.email, request.password, request.name, request.phoneNumber);
+        return new User(request.password,request.name,request.email, request.phoneNumber);
     }
 }

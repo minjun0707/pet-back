@@ -1,8 +1,10 @@
 spring:
+  config:
+    import: "optional:file:.env[.properties]"
   application:
     name: pet
   datasource:
-    url: jdbc:postgresql://localhost:5432/{TEST_DB_NAME}
+    url: jdbc:postgresql://localhost:${TEST_DB_PORT}/${TEST_DB_NAME}
     username: ${TEST_DB_USERNAME}
     password:  ${TEST_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -22,8 +24,14 @@ server:
 
 jwt:
   key:
-    access: ${TEST_JWT_ACCESS_KEY}
-    refresh: ${TEST_JWT_REFRESH_KEY}
+    secret: ${TEST_JWT_SECRET_KEY}
   max-age:
     access: ${TEST_JWT_ACCESS_TIME}
-    refresh: ${TEST_JWT_REFRESH_TIME}
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha

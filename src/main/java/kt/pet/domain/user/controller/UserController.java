@@ -1,5 +1,6 @@
 package kt.pet.domain.user.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import kt.pet.common.response.Response;
 import kt.pet.domain.user.dto.FoundUserResponse;
@@ -17,7 +18,7 @@ public class UserController {
 
     private final UserService userService;
 
-    //회원정보조회
+    @Operation(summary = "사용자 조회", description = "사용자를 조회합니다.")
     @GetMapping("/api/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public Response findUser(@PathVariable Long userId) {
@@ -25,7 +26,7 @@ public class UserController {
         return Response.success(FoundUser);
     }
 
-    //회원정보수정
+    @Operation(summary = "사용자 수정", description = "사용자 정보를 수정합니다")
     @PutMapping("/api/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public Response updateUser(@Valid @RequestBody UserUpdateRequest request, @PathVariable Long userId) {
@@ -33,11 +34,11 @@ public class UserController {
         return Response.success();
     }
 
-    //비밀번호 리셋
-    @PutMapping("/api/users/{userId}/password/reset")
+    @Operation(summary = "비밀번호 변경", description = "사용자의 비밀번호를 변경합니다.")
+    @PutMapping("/api/users/password/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Response resetPassword(PasswordResetRequest request, @PathVariable Long userId) {
-        userService.resetPassword(request,userId);
+    public Response changePassword(@RequestBody PasswordResetRequest request, @PathVariable Long userId) {
+        userService.changePassword(request,userId);
         return Response.success();
     }
 }
